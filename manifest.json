@@ -1,0 +1,31 @@
+{
+  "name": "Translate Note",
+  "description": "",
+  "version": "0.1",
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": ["https://translate.google.co.jp/*"],
+      "css": ["styles.css"],
+      "js": [
+        "jquery-3.6.0.slim.min.js",
+        "contentScript.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "scripting",
+    "declarativeContent"
+  ],
+  "background": {
+    "service_worker": "event.js"
+  },
+  "action": {
+    "default_popup": "popup.html", // <= "service_worker"と併用できなさそう
+    "default_icon": "icon.png",
+    "default_title": "Translate Note"
+  }
+}

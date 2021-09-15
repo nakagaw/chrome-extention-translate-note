@@ -1,0 +1,38 @@
+#TN_Buttons {
+  position: fixed;
+  z-index: 999999999999999999;
+  top:   0;
+  left:  0;
+  right: 0;
+  margin: 15px auto;
+  width: 250px;
+  text-align: center;
+}
+
+.TN-button {
+  padding: 10px 30px;
+  border: 0 none;
+  margin: 0 5px;
+  background-color: rgb(0, 47, 255);
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.TN-button.-load {
+  background-color: rgb(119, 0, 255);
+}
+.TN-button:hover {
+  opacity: 0.6;
+}
+
+
+.text-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+.text-item {
+  width: 140px;
+  padding: 20px;
+  background-color: rgb(209, 209, 209);
+}
