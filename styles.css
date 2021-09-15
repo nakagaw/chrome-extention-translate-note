@@ -5,7 +5,7 @@
   left:  0;
   right: 0;
   margin: 15px auto;
-  width: 250px;
+  width: 400px;
   text-align: center;
 }
 
@@ -20,6 +20,9 @@
 }
 .TN-button.-load {
   background-color: rgb(119, 0, 255);
+}
+.TN-button.-delete {
+  background-color: #d24a4a;
 }
 .TN-button:hover {
   opacity: 0.6;
