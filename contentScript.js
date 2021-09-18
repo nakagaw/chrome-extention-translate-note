@@ -9,33 +9,36 @@ $(function() {
     $(loadButton).prependTo("#TN_Buttons");
     $(saveButton).prependTo("#TN_Buttons");
 
-    // 左：日本語　右：英語　の場合
     $("#TN_SaveTranslateButton").on("click", function() {
         var hashKey = Math.random().toString(32).substring(2);
-        var japanese = $("textarea[aria-label='原文'] + div").text();
-        var english = $("span[data-language-for-alternatives] > span").text();
-
-        var lang = {
-            "ja": japanese, 
-            "en": english
-        };
+        var mode = $("span[data-language-to-translate-into]").attr("data-language-to-translate-into");
+        var originLang = $("textarea[aria-label='原文'] + div").text();
+        var altLang = $("span[data-language-for-alternatives] > span").text();
+        var lang = {};
         var textItem = {};
+
+        // 翻訳方向判定して、日本語が lang1 になるようにする
+        if(mode == "ja") {
+            lang = {
+                "lang1": originLang,
+                "lang2": altLang
+            };
+        } else {
+            lang = {
+                "lang1": altLang,
+                "lang2": originLang
+            };
+        }
 
         chrome.storage.sync.get(["TN"], function(items) {
             // Check data
             if (typeof items.TN === 'undefined') {
-                textItem[hashKey] = lang;
-                console.log("none => ");
-                console.log(textItem);
+                textItem[hashKey] = lang; // undefinedチェック
             } else {
-                textItem = items.TN;
-                console.log("pushed 1 => ");
-                console.log(textItem);
-                textItem[hashKey] = lang;
-                console.log("pushed 2 => ");
-                console.log(textItem);
+                textItem = items.TN //既存データ
+                textItem[hashKey] = lang; //既存データに新しいデータを足す
             }
-            // Save
+            //まとめたデータを保存
             chrome.storage.sync.set({"TN": textItem});
         });
     });
@@ -44,6 +47,7 @@ $(function() {
     $("#TN_LoadTranslateButton").on("click", function() {
         chrome.storage.sync.get(["TN"], function(items) {
             console.log(items);
+            
         });
     });
 
