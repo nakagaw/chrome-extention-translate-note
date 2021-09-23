@@ -12,10 +12,12 @@ $(function() {
     $("#TN_SaveTranslateButton").on("click", function() {
         const hashKey = Math.random().toString(32).substring(2);
         const mode = $("span[data-language-to-translate-into]").attr("data-language-to-translate-into");
-        const originLang = $("textarea[aria-label='原文'] + div").text();
+        const originLang = $("textarea[aria-label='原文']").text();
         const altLang = $("span[data-language-for-alternatives] > span").text();
         let lang = {};
         let textItem = {};
+        console.log(originLang);
+        console.log(altLang);
 
         // 翻訳方向判定して、日本語が lang1 になるようにする
         if(mode == "ja") {
