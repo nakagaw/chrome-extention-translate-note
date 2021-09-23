@@ -10,8 +10,8 @@ document.body.onload = function() {
       for (let value of idList) {
         // データひとつずつの取り出しに成功 => obj[0][value]
         const li = document.createElement('li');
-        let lang1div = document.createElement('pre');
-        let lang2div = document.createElement('pre');
+        let lang1div = document.createElement('textarea');
+        let lang2div = document.createElement('textarea');
   
         li.setAttribute("id", value);
         li.className = "TN-list__item";
@@ -27,3 +27,15 @@ document.body.onload = function() {
     }
   });
 }
+
+$(function(){
+  $('.TN-list__item-lang textarea')
+  .on('input', function(){
+    if ($(this).outerHeight() > this.scrollHeight){
+      $(this).height(1)
+    }
+    while ($(this).outerHeight() < this.scrollHeight){
+      $(this).height($(this).height() + 1)
+    }
+  });
+});
