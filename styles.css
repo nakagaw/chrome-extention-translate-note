@@ -29,13 +29,26 @@
 }
 
 
-.text-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5px;
+.TN-list {
+  width: 600px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
-.text-item {
-  width: 140px;
-  padding: 20px;
-  background-color: rgb(209, 209, 209);
+.TN-list__item {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+.TN-list__item-lang {
+  flex: 0 1 50%;
+  margin: 10px;
+  font-family: sans-serif;
+  font-size: 14px;
+  line-height: 1.2;
+}
+.TN-list__item-lang.-lang1 {
+  border-right: 1px solid #ddd;
+  padding-right: 20px;
 }

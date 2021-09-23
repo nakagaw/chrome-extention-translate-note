@@ -10,12 +10,12 @@ $(function() {
     $(saveButton).prependTo("#TN_Buttons");
 
     $("#TN_SaveTranslateButton").on("click", function() {
-        var hashKey = Math.random().toString(32).substring(2);
-        var mode = $("span[data-language-to-translate-into]").attr("data-language-to-translate-into");
-        var originLang = $("textarea[aria-label='原文'] + div").text();
-        var altLang = $("span[data-language-for-alternatives] > span").text();
-        var lang = {};
-        var textItem = {};
+        const hashKey = Math.random().toString(32).substring(2);
+        const mode = $("span[data-language-to-translate-into]").attr("data-language-to-translate-into");
+        const originLang = $("textarea[aria-label='原文'] + div").text();
+        const altLang = $("span[data-language-for-alternatives] > span").text();
+        let lang = {};
+        let textItem = {};
 
         // 翻訳方向判定して、日本語が lang1 になるようにする
         if(mode == "ja") {
@@ -45,9 +45,29 @@ $(function() {
 
     // デバッグ用
     $("#TN_LoadTranslateButton").on("click", function() {
-        chrome.storage.sync.get(["TN"], function(items) {
-            console.log(items);
+        chrome.storage.sync.get(["TN"], function(TN) {
+            if (!Object.keys(TN).length) return; // undefinedチェック
             
+            let obj = Object.values(TN);
+            let idList = Object.keys(obj[0]); // 配列から配列のみ取り出し
+            let ul = document.createElement('ul');
+            ul.className = "TN-list";
+            for (let value of idList) {
+                // データひとつずつの取り出しに成功 => obj[0][value]
+                const li = document.createElement('li');
+                let lang1div = document.createElement('div');
+                let lang2div = document.createElement('div');
+
+                li.setAttribute("id", value);
+                li.className = "TN-list__item";
+                lang1div.className = "lang1";
+                lang2div.className = "lang2";
+                lang1div.innerHTML = obj[0][value]["lang1"];
+                lang2div.innerHTML = obj[0][value]["lang2"];
+                li.append(lang1div,lang2div);
+                ul.append(li);
+            }
+            console.log(ul);
         });
     });
 
